@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { MarketOverviewPage } from "./MarketOverviewPage/MarketOverviewPage";
 import { LiquidityPage } from "./LiquidityPage/LiquidityPage";
 import Header from './Wrapper/Header/Header';
-import { Footer } from './Wrapper/Footer/Footer';
+import Footer from './Wrapper/Footer/Footer';
 
 class App extends Component {
   render() {
