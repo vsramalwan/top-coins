@@ -1,19 +1,35 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import logo from './logo.jpg';
 import './App.css';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { MarketOverviewPage } from "./MarketOverviewPage/MarketOverviewPage";
+import { LiquidityPage } from "./LiquidityPage/LiquidityPage";
+
+const MainMenu = () => {
+return (
+<div>
+  <Link to="/">
+    <a>Market Overview&nbsp;&nbsp;</a>
+  </Link>
+  <Link to="/liquidity">
+    <a>&nbsp;&nbsp;Liquidity</a>
+  </Link>
+</div>
+);
+};
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
+      <Router>
+        <div className="App">
+          <MainMenu />
+          <div>
+            <Route exact path="/" component={MarketOverviewPage} />
+            <Route exact path="/liquidity" component={LiquidityPage} />
+          </div>
+        </div>
+      </Router>
     );
   }
 }
