@@ -11,7 +11,7 @@ export class MarketOverviewPage extends Component {
 		super();
 
 		this.state = {
-			tableData: [{
+      tableData: [{
 				name: '',
 				symbol: '',
 				rank: '',
@@ -23,6 +23,8 @@ export class MarketOverviewPage extends Component {
       responseType: 'json'
     }).then(response => {
       for (var prop in response.data['data']) { this.state.tableData.push(response.data['data'][prop]);}
+      this.setState({ tableData: this.state.tableData });
+      console.log(this.state.tableData);
     });
   }
   
@@ -34,7 +36,30 @@ export class MarketOverviewPage extends Component {
         <br />
         <br />
         <br />
-        This is the market overview page!
+        <ReactTable
+          data={this.state.tableData}
+          columns={[
+            {
+              Header: 'Market Overview',
+              columns: [
+                {
+                  Header: 'Name',
+                  accessor: 'name',
+                },
+                {
+                  Header: 'Symbol',
+                  accessor: 'symbol',
+                },
+                {
+                  Header: 'Rank',
+                  accessor: 'rank',
+                },
+              ],
+            },
+          ]}
+          defaultPageSize={5}
+          className="-striped -highlight"
+        />
         <Footer />
       </div>
     )
