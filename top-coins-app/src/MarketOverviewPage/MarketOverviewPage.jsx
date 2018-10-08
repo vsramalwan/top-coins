@@ -43,22 +43,39 @@ export class MarketOverviewPage extends Component {
               Header: 'Market Overview',
               columns: [
                 {
+                  Header: 'Rank',
+                  accessor: 'rank',
+                },
+                {
                   Header: 'Name',
                   accessor: 'name',
                 },
                 {
-                  Header: 'Symbol',
-                  accessor: 'symbol',
+                  Header: 'Price',
+                  accessor: 'quotes.USD.price',
                 },
                 {
-                  Header: 'Rank',
-                  accessor: 'rank',
+                  Header: 'Price Change (24h)',
+                  accessor: 'quotes.USD.percent_change_24h',
+                },
+                {
+                  Header: 'Market Cap',
+                  accessor: 'quotes.USD.market_cap',
+                },
+                {
+                  Header: 'Volume (24h)',
+                  accessor: 'quotes.USD.volume_24h',
                 },
               ],
             },
           ]}
-          defaultPageSize={5}
+          defaultPageSize={10}
+          pageSizeOptions={[10, 50, 100]}
           className="-striped -highlight"
+          sorted={[{ // the sorting model for the table
+            id: 'rank',
+            asc: true
+          }]}
         />
         <Footer />
       </div>
