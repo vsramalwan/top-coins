@@ -11,11 +11,7 @@ export class MarketOverviewPage extends Component {
 		super();
 
 		this.state = {
-      tableData: [{
-				name: '',
-				symbol: '',
-				rank: '',
-			}],
+      tableData: [],
 		};
   }
   componentDidMount () {
@@ -57,27 +53,51 @@ export class MarketOverviewPage extends Component {
               columns: [
                 {
                   Header: 'Price',
+                  id: 'price',
                   accessor: 'quotes.USD.price',
+                  Cell: row => {
+                    return (
+                      <div>
+                        <span>${parseFloat(row.row.price.toFixed(2)).toLocaleString()}</span>
+                      </div>
+                    )
+                  }
                 },
                 {
                   Header: 'Price Change (24h)',
-                  id: 'x',
+                  id: 'priceChange',
                   accessor: 'quotes.USD.percent_change_24h',
                   Cell: row => {
                     return (
                       <div>
-                        <span>{row.row.x*100}</span>
+                        <span>{row.row.priceChange}%</span>
                       </div>
                     )
                   }
                 },
                 {
                   Header: 'Market Cap',
+                  id: 'marketCap',
                   accessor: 'quotes.USD.market_cap',
+                  Cell: row => {
+                    return (
+                      <div>
+                        <span>${row.row.marketCap.toLocaleString()}</span>
+                      </div>
+                    )
+                  }
                 },
                 {
                   Header: 'Volume (24h)',
+                  id: 'volume',
                   accessor: 'quotes.USD.volume_24h',
+                  Cell: row => {
+                    return (
+                      <div>
+                        <span>${parseFloat(row.row.volume.toFixed(0)).toLocaleString()}</span>
+                      </div>
+                    )
+                  }
                 },
               ],
             },
