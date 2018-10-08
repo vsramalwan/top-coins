@@ -22,10 +22,10 @@ export class MarketOverviewPage extends Component {
     axios.get('https://api.coinmarketcap.com/v2/ticker/?sort=rank', {
       responseType: 'json'
     }).then(response => {
-        this.setState({ tableData: response.data });
-        console.log(this.state.tableData['data']);
+      for (var prop in response.data['data']) { this.state.tableData.push(response.data['data'][prop]);}
     });
   }
+  
   render() {
     return (
       <div>
