@@ -40,7 +40,7 @@ export class MarketOverviewPage extends Component {
           data={this.state.tableData}
           columns={[
             {
-              Header: 'Market Overview',
+              Header: 'Details',
               columns: [
                 {
                   Header: 'Rank',
@@ -49,14 +49,27 @@ export class MarketOverviewPage extends Component {
                 {
                   Header: 'Name',
                   accessor: 'name',
-                },
+                }
+              ]
+            },
+            {
+              Header: 'Quotes',
+              columns: [
                 {
                   Header: 'Price',
                   accessor: 'quotes.USD.price',
                 },
                 {
                   Header: 'Price Change (24h)',
+                  id: 'x',
                   accessor: 'quotes.USD.percent_change_24h',
+                  Cell: row => {
+                    return (
+                      <div>
+                        <span>{row.row.x*100}</span>
+                      </div>
+                    )
+                  }
                 },
                 {
                   Header: 'Market Cap',
