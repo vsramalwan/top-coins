@@ -111,7 +111,7 @@ export class MarketOverviewPage extends Component {
               ],
             },
           ]}
-          pageSizeOptions={[10, 50, 100]}
+          pageSizeOptions={[10, 50, this.state.tableData.length]}
           pageSize={this.state.pageSize}
           onPageSizeChange={this.handlePageSizeChange}
           className="-striped -highlight"
