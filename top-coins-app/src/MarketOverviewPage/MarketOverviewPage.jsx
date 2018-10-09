@@ -12,8 +12,10 @@ export class MarketOverviewPage extends Component {
 
 		this.state = {
       tableData: [],
+      pageSize: 10,
 		};
   }
+  
   componentDidMount () {
     axios.get('https://api.coinmarketcap.com/v2/ticker/?sort=rank', {
       responseType: 'json'
@@ -22,6 +24,13 @@ export class MarketOverviewPage extends Component {
       this.setState({ tableData: this.state.tableData });
       console.log(this.state.tableData);
     });
+  }
+  
+  handlePageSizeChange = (pageSize, pageIndex) => {
+    this.setState({
+      pageSize: pageSize
+    });
+    console.log('page size value: ', pageSize);
   }
   
   render() {
@@ -102,8 +111,9 @@ export class MarketOverviewPage extends Component {
               ],
             },
           ]}
-          defaultPageSize={10}
           pageSizeOptions={[10, 50, 100]}
+          pageSize={this.state.pageSize}
+          onPageSizeChange={this.handlePageSizeChange}
           className="-striped -highlight"
           sorted={[{ // the sorting model for the table
             id: 'rank',
