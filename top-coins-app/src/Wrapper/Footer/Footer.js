@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react';
 
 import "./../../_assets/stylesheets/mui.min.css";
 import "./../../_assets/js/mui.min.js";

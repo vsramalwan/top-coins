@@ -1,0 +1,29 @@
+{
+  "name": "top-coins",
+  "version": "1.0.0",
+  "description": "**Top Coins**",
+  "main": "index.jsx",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "react-redux": "^5.0.7",
+    "react-router-dom": "^4.3.1",
+    "react-table": "^6.8.6",
+    "redux": "^4.0.0",
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.3.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/w1n5rx/top-coins.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/w1n5rx/top-coins/issues"
+  },
+  "homepage": "https://github.com/w1n5rx/top-coins#readme"
+}

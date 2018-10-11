@@ -1,29 +1,20 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+import { connect } from 'react-redux';
 import ReactTable from "react-table";
 import 'react-table/react-table.css'
+import { dataAction } from './../_actions/data.actions';
 
 import Header from './../Wrapper/Header/Header';
 import Footer from './../Wrapper/Footer/Footer';
 
-export class MarketOverviewPage extends Component {
-  constructor () {
-		super();
+class MarketOverviewPage extends Component {
+  constructor (props) {
+		super(props);
 
 		this.state = {
-      tableData: [],
+      // tableData: [],
       pageSize: 10,
 		};
-  }
-  
-  componentDidMount () {
-    axios.get('https://api.coinmarketcap.com/v2/ticker/?sort=rank', {
-      responseType: 'json'
-    }).then(response => {
-      for (var prop in response.data['data']) { this.state.tableData.push(response.data['data'][prop]);}
-      this.setState({ tableData: this.state.tableData });
-      console.log(this.state.tableData);
-    });
   }
   
   handlePageSizeChange = (pageSize, pageIndex) => {
@@ -34,6 +25,7 @@ export class MarketOverviewPage extends Component {
   }
   
   render() {
+    const { topCoinsData, loadData } = this.props;
     return (
       <div>
         <Header />
@@ -42,7 +34,7 @@ export class MarketOverviewPage extends Component {
         <br />
         <br />
         <ReactTable
-          data={this.state.tableData}
+          data={ topCoinsData }
           columns={[
             {
               Header: 'Details',
@@ -111,7 +103,7 @@ export class MarketOverviewPage extends Component {
               ],
             },
           ]}
-          pageSizeOptions={[10, 50, this.state.tableData.length]}
+          pageSizeOptions={[10, 50, 100]}
           pageSize={this.state.pageSize}
           onPageSizeChange={this.handlePageSizeChange}
           className="-striped -highlight"
@@ -126,4 +118,12 @@ export class MarketOverviewPage extends Component {
   }
 }
 
-export default MarketOverviewPage
+const mapStateToProps = (state) => {
+	return {
+    topCoinsData: state.dataReducer.data,
+  };
+};
+
+export default connect(mapStateToProps, {
+  loadData: dataAction,
+})(MarketOverviewPage);
