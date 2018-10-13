@@ -1,7 +1,7 @@
 const dataConstants = {
-  DATA_FETCH: 'DATA_FETCH',
-  // DATA_SUCCESS: 'DATA_SUCCESS',
-  // DATA_FAILURE: 'DATA_FAILURE',
+  FETCH_REQUEST: 'FETCH_REQUEST',
+  FETCH_SUCCESS: 'FETCH_SUCCESS',
+  FETCH_ERROR: 'FETCH_ERROR',
 };
 
 export default dataConstants;

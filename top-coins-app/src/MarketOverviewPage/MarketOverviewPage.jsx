@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ReactTable from "react-table";
 import 'react-table/react-table.css'
-import { dataAction } from './../_actions/data.actions';
+import { getTopCoinsData } from './../_actions/data.actions';
 
 import Header from './../Wrapper/Header/Header';
 import Footer from './../Wrapper/Footer/Footer';
@@ -13,8 +13,35 @@ class MarketOverviewPage extends Component {
 
 		this.state = {
       // tableData: [],
+      dummyData: [{
+        "id": 1,
+        "name": "Bitcoin",
+        "symbol": "BTC",
+        "website_slug": "bitcoin",
+        "rank": 1,
+        "circulating_supply": 17320125,
+        "total_supply": 17320125,
+        "max_supply": 21000000,
+        "quotes": {
+          "USD": {
+            "price": 6288.80654986,
+            "volume_24h": 3111429690.02278,
+            "market_cap": 108922915544,
+            "percent_change_1h": 0.01,
+            "percent_change_24h": -0.21,
+            "percent_change_7d": -4.67
+          }
+        },
+        "last_updated": 1539443423
+      }],
       pageSize: 10,
 		};
+  }
+
+  componentDidMount() {
+    // const { loadData } = this.props;
+    // return loadData();
+    // this.props.dispatch(getTopCoinsData());
   }
   
   handlePageSizeChange = (pageSize, pageIndex) => {
@@ -25,7 +52,8 @@ class MarketOverviewPage extends Component {
   }
   
   render() {
-    const { topCoinsData, loadData } = this.props;
+    const { loading, topCoinsData, error } = this.props;
+    console.log("topCoinsData", topCoinsData);
     return (
       <div>
         <Header />
@@ -119,11 +147,14 @@ class MarketOverviewPage extends Component {
 }
 
 const mapStateToProps = (state) => {
+  // console.log("---->", state.data.items);
 	return {
-    topCoinsData: state.dataReducer.data,
+    topCoinsData: state.items,
+    loading: state.loading,
+    error: state.error,
   };
 };
 
 export default connect(mapStateToProps, {
-  loadData: dataAction,
+  // loadData: getTopCoinsData,
 })(MarketOverviewPage);
