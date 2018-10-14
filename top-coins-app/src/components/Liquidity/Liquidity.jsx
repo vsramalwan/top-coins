@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
-import Header from './../Wrapper/Header/Header';
-import Footer from './../Wrapper/Footer/Footer';
 import { ScatterplotChart } from 'react-easy-chart';
 import ToolTip from "./../../assets/js/ToolTip";
+import { connect } from 'react-redux';
+import { getTopCoinsData } from './../../actions/data.actions';
+
+import Header from './../Wrapper/Header/Header';
+import Footer from './../Wrapper/Footer/Footer';
 export class Liquidity extends Component {
   constructor (props) {
 		super(props);
@@ -23,6 +26,9 @@ export class Liquidity extends Component {
   componentDidMount() {
     window.addEventListener('resize', this.handleResize);
     this.handleResize();
+
+    const { loadData } = this.props;
+    return loadData();
   }
   
   componentWillUnmount() {
@@ -65,6 +71,15 @@ export class Liquidity extends Component {
   }
 
   render() {
+    const { loading, topCoinsData, error } = this.props;
+    // console.log("topCoinsData", topCoinsData);
+    if (error) {
+      return <div>Error! {error.message}</div>;
+    }
+
+    if (loading) {
+      return <div>Loading...</div>;
+    }
     const data = [
       {
         // // type: 'One',
@@ -154,4 +169,14 @@ export class Liquidity extends Component {
   }
 }
 
-export default Liquidity;
+const mapStateToProps = (state) => {
+	return {
+    topCoinsData: state.dataReducer.items,
+    loading: state.dataReducer.loading,
+    error: state.dataReducer.error,
+  };
+};
+
+export default connect(mapStateToProps, {
+  loadData: getTopCoinsData,
+})(Liquidity);
