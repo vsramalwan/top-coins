@@ -22,6 +22,7 @@ const dataActionError = () => {
 
 export function  getTopCoinsData() {
   return (dispatch) => {
+    dispatch(dataAction());
     return axios.get('https://api.coinmarketcap.com/v2/ticker/?sort=rank', {
       responseType: 'json'
     }).then(response => {

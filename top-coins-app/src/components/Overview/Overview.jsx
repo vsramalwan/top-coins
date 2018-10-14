@@ -29,6 +29,13 @@ class Overview extends Component {
   
   render() {
     const { loading, topCoinsData, error } = this.props;
+    if (error) {
+      return <div>Error! {error.message}</div>;
+    }
+
+    if (loading) {
+      return <div>Loading...</div>;
+    }
     return (
       <div>
         <Header />
