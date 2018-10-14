@@ -1,4 +1,4 @@
-import dataActions from '../_actions/data.actions';
+import dataConstants  from './../_constants/data.constants';
 
 const initialState = {
   items: [],
@@ -8,19 +8,19 @@ const initialState = {
 
 const dataReducer = (state = initialState, action)  => {
   switch (action.type) {
-    case dataActions.FETCH_REQUEST:
+    case dataConstants.FETCH_REQUEST:
       return {
         ...state,
         loading: true,
         error: null
       };
-    case dataActions.FETCH_SUCCESS:
+    case dataConstants.FETCH_SUCCESS:
       return {
         ...state,
         loading: false,
         items: action.data
       };
-    case dataActions.FETCH_ERROR:
+    case dataConstants.FETCH_ERROR:
       return {
         ...state,
         loading: false,

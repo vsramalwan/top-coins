@@ -12,48 +12,23 @@ class MarketOverviewPage extends Component {
 		super(props);
 
 		this.state = {
-      // tableData: [],
-      dummyData: [{
-        "id": 1,
-        "name": "Bitcoin",
-        "symbol": "BTC",
-        "website_slug": "bitcoin",
-        "rank": 1,
-        "circulating_supply": 17320125,
-        "total_supply": 17320125,
-        "max_supply": 21000000,
-        "quotes": {
-          "USD": {
-            "price": 6288.80654986,
-            "volume_24h": 3111429690.02278,
-            "market_cap": 108922915544,
-            "percent_change_1h": 0.01,
-            "percent_change_24h": -0.21,
-            "percent_change_7d": -4.67
-          }
-        },
-        "last_updated": 1539443423
-      }],
       pageSize: 10,
 		};
   }
 
   componentDidMount() {
-    // const { loadData } = this.props;
-    // return loadData();
-    // this.props.dispatch(getTopCoinsData());
+    const { loadData } = this.props;
+    return loadData();
   }
   
   handlePageSizeChange = (pageSize, pageIndex) => {
     this.setState({
       pageSize: pageSize
     });
-    console.log('page size value: ', pageSize);
   }
   
   render() {
     const { loading, topCoinsData, error } = this.props;
-    console.log("topCoinsData", topCoinsData);
     return (
       <div>
         <Header />
@@ -131,7 +106,7 @@ class MarketOverviewPage extends Component {
               ],
             },
           ]}
-          pageSizeOptions={[10, 50, 100]}
+          pageSizeOptions={[10, 50, topCoinsData.length]}
           pageSize={this.state.pageSize}
           onPageSizeChange={this.handlePageSizeChange}
           className="-striped -highlight"
@@ -147,14 +122,13 @@ class MarketOverviewPage extends Component {
 }
 
 const mapStateToProps = (state) => {
-  // console.log("---->", state.data.items);
 	return {
-    topCoinsData: state.items,
-    loading: state.loading,
-    error: state.error,
+    topCoinsData: state.dataReducer.items,
+    loading: state.dataReducer.loading,
+    error: state.dataReducer.error,
   };
 };
 
 export default connect(mapStateToProps, {
-  // loadData: getTopCoinsData,
+  loadData: getTopCoinsData,
 })(MarketOverviewPage);
