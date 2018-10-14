@@ -1,5 +1,5 @@
 import axios from 'axios';
-import dataConstants from "./../_constants/data.constants";
+import dataConstants from "./../constants/data.constants";
 
 const dataAction = () => {
   return {

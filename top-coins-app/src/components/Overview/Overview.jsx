@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ReactTable from "react-table";
-import 'react-table/react-table.css'
-import { getTopCoinsData } from './../_actions/data.actions';
+import 'react-table/react-table.css';
+import { getTopCoinsData } from './../../actions/data.actions';
 
 import Header from './../Wrapper/Header/Header';
 import Footer from './../Wrapper/Footer/Footer';
 
-class MarketOverviewPage extends Component {
+class Overview extends Component {
   constructor (props) {
 		super(props);
 
@@ -131,4 +131,4 @@ const mapStateToProps = (state) => {
 
 export default connect(mapStateToProps, {
   loadData: getTopCoinsData,
-})(MarketOverviewPage);
+})(Overview);

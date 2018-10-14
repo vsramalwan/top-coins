@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import "./../../_assets/stylesheets/mui.min.css";
-import "./../../_assets/stylesheets/style.css";
-import "./../../_assets/js/mui.min.js";
+import "./../../../assets/stylesheets/mui.min.css";
+import "./../../../assets/stylesheets/style.css";
+import "./../../../assets/js/mui.min.js";
 
 const Header = () => {
 	return(
