@@ -1,7 +1,7 @@
 import axios from 'axios';
 import dataConstants from "./../constants/data.constants";
 
-const dataAction = () => {
+export const dataAction = () => {
   return {
     type: dataConstants.FETCH_REQUEST,
   }
@@ -14,7 +14,7 @@ export const dataActionSuccess = (data) => {
   }
 }
 
-const dataActionError = () => {
+export const dataActionError = () => {
   return {
     type: dataConstants.FETCH_ERROR,
   }

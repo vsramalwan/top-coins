@@ -21,7 +21,7 @@ class Overview extends Component {
     return loadData();
   }
   
-  handlePageSizeChange = (pageSize, pageIndex) => {
+  handlePageSizeChange = (pageSize) => {
     this.setState({
       pageSize: pageSize
     });
@@ -136,6 +136,8 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, {
-  loadData: getTopCoinsData,
-})(Overview);
+const mapDispatchToProps = (dispatch) => ({
+  loadData: () => dispatch(getTopCoinsData()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Overview);

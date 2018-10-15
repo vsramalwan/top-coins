@@ -16,6 +16,8 @@ export class Liquidity extends Component {
       left: 0,
       y: 0,
       x: 0,
+      z: 0,
+      type: '',
       windowWidth: 400,
       componentWidth: 1000,
     };
@@ -48,7 +50,9 @@ export class Liquidity extends Component {
       top: `${e.screenY - 10}px`,
       left: `${e.screenX + 10}px`,
       y: d.y,
-      x: d.x
+      x: d.x,
+      z: d.z,
+      type: d.type,
     });
   }
   
@@ -63,7 +67,10 @@ export class Liquidity extends Component {
           top={this.state.top}
           left={this.state.left}
         >
-            The x value is {this.state.x} and the y value is {this.state.y}
+          Name: {this.state.type},
+          Market cap: {this.state.x},
+          Volume: {this.state.y},
+          Price Change: {this.state.z}
         </ToolTip>
       );
     }
@@ -72,7 +79,6 @@ export class Liquidity extends Component {
 
   render() {
     const { loading, topCoinsData, error } = this.props;
-    // console.log("topCoinsData", topCoinsData);
     if (error) {
       return <div>Error! {error.message}</div>;
     }
@@ -80,68 +86,17 @@ export class Liquidity extends Component {
     if (loading) {
       return <div>Loading...</div>;
     }
-    const data = [
-      {
-        // // type: 'One',
-        x: 1,
-        y: 5,
-        z: 500
-      },
-      {
-        // // type: 'Two',
-        x: 3,
-        y: 1,
-        z: 100
-      },
-      {
-        // // type: 'Three',
-        x: 0,
-        y: 6,
-        z: 600
-      },
-      {
-        // // type: 'Four',
-        x: 5,
-        y: 2,
-        z: 200
-      },
-      {
-        // type: 'Five',
-        x: 4,
-        y: 4,
-        z: 400
-      },
-      {
-        // type: 'Six',
-        x: 5,
-        y: 9,
-        z: 900
-      },
-      {
-        // type: 'Seven',
-        x: 9,
-        y: 1,
-        z: 100
-      },
-      {
-        // type: 'Eight',
-        x: 5,
-        y: 6,
-        z: 600
-      },
-      {
-        // type: 'Nine',
-        x: 3,
-        y: 9,
-        z: 900
-      },
-      {
-        // type: 'Ten',
-        x: 7,
-        y: 9,
-        z: 900
-      }
-    ];
+    let data = [];
+    console.log("topCoinsData", topCoinsData);
+    // const dataSize = topCoinsData.length;
+    topCoinsData.forEach(function (item) {
+      data.push({
+        type: item.name, 
+        x: item.quotes.USD.market_cap, 
+        y: item.quotes.USD.volume_24h, 
+        z: item.quotes.USD.percent_change_24h
+      });
+    })
     
     return (
       <div>
@@ -153,9 +108,13 @@ export class Liquidity extends Component {
         <div ref="component">
           <ScatterplotChart
             data={data}
-            width={this.state.componentWidth/2}
-            height={this.state.componentWidth / 4}
+            width={this.state.componentWidth}
+            height={this.state.componentWidth / 2}
             axes={(this.state.componentWidth) > 400}
+            yAxisOrientLeft
+            xType='linear'
+            yType='linear'
+            // xDomainRange={[0, dataSize]}
             axisLabels={{x: 'Market Cap', y: 'Volume'}}
             margin={{top: 10, right: 10, bottom: 30, left: 100}}
             mouseOverHandler={this.mouseOverHandler}
@@ -177,6 +136,8 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, {
-  loadData: getTopCoinsData,
-})(Liquidity);
+const mapDispatchToProps = (dispatch) => ({
+  loadData: () => dispatch(getTopCoinsData()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Liquidity);
