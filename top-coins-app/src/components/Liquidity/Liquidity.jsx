@@ -30,7 +30,7 @@ export class Liquidity extends Component {
     this.handleResize();
 
     const { loadData } = this.props;
-    return loadData();
+    return loadData(0, this.props.topCoinsData.length);
   }
   
   componentWillUnmount() {
@@ -87,8 +87,6 @@ export class Liquidity extends Component {
       return <div>Loading...</div>;
     }
     let data = [];
-    console.log("topCoinsData", topCoinsData);
-    // const dataSize = topCoinsData.length;
     topCoinsData.forEach(function (item) {
       data.push({
         type: item.name, 
@@ -137,7 +135,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  loadData: () => dispatch(getTopCoinsData()),
+  loadData: (start, limit) => dispatch(getTopCoinsData(start, limit)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Liquidity);
