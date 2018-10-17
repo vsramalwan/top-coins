@@ -13,20 +13,35 @@ class Overview extends Component {
 
 		this.state = {
       pageSize: 10,
+      pageIndex: 0,
 		};
   }
 
   componentDidMount() {
     const { loadData } = this.props;
-    return loadData();
+    return loadData(this.state.pageIndex, this.state.pageSize);
   }
   
-  handlePageSizeChange = (pageSize) => {
+  handlePageSizeChange = (pageSize, pageIndex) => {
+    console.log("pageSize", pageSize);
     this.setState({
-      pageSize: pageSize
+      pageSize: pageSize,
+      pageIndex: pageIndex,
     });
+    const { loadData } = this.props;
+    return loadData(pageIndex, pageSize);
   }
   
+  handlePageChange = (pageIndex, pageSize) => {
+    console.log("pageIndex", pageIndex);
+    this.setState({
+      pageIndex: pageIndex,
+      pageSize: pageSize,
+    });
+    const { loadData } = this.props;
+    return loadData(pageIndex, pageSize);
+  }
+
   render() {
     const { loading, topCoinsData, error } = this.props;
     if (error) {
@@ -39,10 +54,10 @@ class Overview extends Component {
     return (
       <div>
         <Header />
+        {/* <br />
         <br />
         <br />
-        <br />
-        <br />
+        <br /> */}
         <ReactTable
           data={ topCoinsData }
           columns={[
@@ -113,9 +128,10 @@ class Overview extends Component {
               ],
             },
           ]}
-          pageSizeOptions={[10, 50, topCoinsData.length]}
+          pageSizeOptions={[10, 50, 100]}
           pageSize={this.state.pageSize}
           onPageSizeChange={this.handlePageSizeChange}
+          onPageChange={this.handlePageChange}
           className="-striped -highlight"
           sorted={[{ // the sorting model for the table
             id: 'rank',
@@ -137,7 +153,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  loadData: () => dispatch(getTopCoinsData()),
+  loadData: (start, limit) => dispatch(getTopCoinsData(start, limit)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Overview);

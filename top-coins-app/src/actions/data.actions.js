@@ -20,10 +20,11 @@ export const dataActionError = () => {
   }
 }
 
-export function  getTopCoinsData() {
+export function  getTopCoinsData(start, limit) {
   return (dispatch) => {
     dispatch(dataAction());
-    return axios.get('https://api.coinmarketcap.com/v2/ticker/?sort=rank', {
+    let url= 'https://api.coinmarketcap.com/v2/ticker/?start=' +start+ '&limit=' +limit+ '&sort=rank';
+    return axios.get(url, {
       responseType: 'json'
     }).then(response => {
       dispatch(dataActionSuccess(Object.values(response.data.data)));

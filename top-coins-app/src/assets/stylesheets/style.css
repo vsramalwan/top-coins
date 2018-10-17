@@ -23,11 +23,11 @@ button {
  */
 
 header {
-  position: fixed;
-  top: 0;
+  position: relative;
+  top: auto;
   right: 0;
   left: 0;
-  z-index: 2;
+  overflow: auto;
 }
 
 header ul.mui-list--inline {
@@ -42,6 +42,18 @@ header table {
   width: 100%;
 }
 
+header a:link {
+  color: white;
+}
+header a:visited {
+  color: white;
+}
+header a:hover {
+  color: blueviolet;
+}
+header a:active {
+  color: blueviolet;
+}
 /**
  * Content CSS
  */
@@ -66,8 +78,4 @@ footer {
   background-color: #eee;
   border-top: 1px solid #e0e0e0;
   padding-top: 35px;
-}
-
-.rv-xy-plot {
-  font-family: sans-serif;
 }
