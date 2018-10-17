@@ -108,9 +108,9 @@ export class Liquidity extends Component {
         <div ref="component">
           <ScatterplotChart
             data={data}
-            width={this.state.componentWidth}
-            height={this.state.componentWidth / 2}
-            axes={(this.state.componentWidth) > 400}
+            width={this.state.componentWidth / 1.5}
+            height={this.state.componentWidth / 3}
+            axes
             yAxisOrientLeft
             xType='linear'
             yType='linear'
