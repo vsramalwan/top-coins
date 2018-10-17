@@ -12,7 +12,7 @@ class Overview extends Component {
 		super(props);
 
 		this.state = {
-      pageSize: 10,
+      pageSize: this.props.topCoinsData.length>0?this.props.topCoinsData.length:10,
       pageIndex: 0,
 		};
   }
