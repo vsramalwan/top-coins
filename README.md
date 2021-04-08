@@ -59,19 +59,3 @@ e |        *   *      *         *
 Chart should be interactive – when hover over the point, it should display a tooltip with information like (`name`, `marketcap`, `volume` & `price change`).
 
 Each point represents one coin.
-
-### Architecture
-
-* Your solution should be written in React. You may use [create-react-app](https://github.com/facebook/create-react-app) or similar.
-* For UI you can use any framework (Bootstrap, Semantic-UI, etc) or write your own CSS.
-* You're free to use any charts library. Think about the best fit for solving the task.
-* For state management you may use a state-management library such as `Redux` or use React's `setState()`.
-* Make sure it works in latest Chrome, Safari or Firefox
-* Webpage should be responsive.
-
-# Solution
-* React-table is used for the "market oveview" view because it gives us the flexibility to play around with data irrespective of the form of that data.
-* I choose react-easy-chart as the package for "liquidity" view because it satisfied all of the requirements.
-* Redux is choosen for state management as it is more flexible  between these components and in future if more components are added the props/state changes won't create a havoc amongst old and new components.
-* For decorating Header and Footer I generally choose material-ui and that's more towards personal choice ;)
-* One part I completely regret at this stage is not including any test cases for the app. If I get some more time then I'll integrate it quickly.
