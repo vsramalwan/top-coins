@@ -1,4 +1,6 @@
-on: workflow_dispatch
+on:
+  schedule:
+  - cron: 0 0 * * 5
 name: Update
 jobs:
   package-update:
@@ -8,7 +10,7 @@ jobs:
       - name: package-update
         uses: taichi/actions-package-update@master
         env:
-          AUTHOR_EMAIL: john@example.com
+          AUTHOR_EMAIL: github@actions.com
           AUTHOR_NAME: github-actions
           EXECUTE: "true"
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
