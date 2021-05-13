@@ -1,5 +1,8 @@
 **Top Coins**
 
+#### **Disclaimer
+I use this repo to try new features from the Open source community.
+
 ### Overview
 
 Create a webapp that allows for a simple analysis of crypto assets. The page should present a navigation bar with two pages:

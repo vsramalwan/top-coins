@@ -10,7 +10,11 @@
     "react-table": "^6.11.5",
     "redux": "^4.0.5",
     "redux-logger": "^3.0.6",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "react": "^16.5.2",
+    "react-dom": "^16.5.2",
+    "react-easy-chart": "^1.0.0",
+    "react-scripts": "1.1.5"
   },
   "devDependencies": {},
   "scripts": {
@@ -18,12 +22,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/w1n5rx/top-coins.git"
+    "url": "git+https://github.com/vsramalwan/top-coins.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/w1n5rx/top-coins/issues"
+    "url": "https://github.com/vsramalwan/top-coins/issues"
   },
-  "homepage": "https://github.com/w1n5rx/top-coins#readme"
+  "homepage": "https://github.com/vsramalwan/top-coins#readme"
 }
